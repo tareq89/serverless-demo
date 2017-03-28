@@ -1,0 +1,25 @@
+{
+  "name": "statup",
+  "version": "1.0.0",
+  "main": "handler.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "muhammed tareq aziz",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless-offline": "^3.13.1"
+  },
+  "dependencies": {
+    "serverless-offline": "^3.13.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tareq89/serverless-demo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tareq89/serverless-demo/issues"
+  },
+  "homepage": "https://github.com/tareq89/serverless-demo#readme",
+  "description": ""
+}
