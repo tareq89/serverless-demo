@@ -18,24 +18,23 @@ module.exports.handler = (event, context, callback) => {
     var amazonKeywordExist = _message.includes("amazon");
 
     if (keyWordExist) {
-        var messagesToBePurged = client.lrange("messagelist", 0, -1);
-        messagesToBePurged = JSON.stringify(messagesToBePurged);
-
-        fs.writeFile('message.txt', messagesToBePurged, (err) => {
-            if (err) throw err;            
-            console.log('The file has been saved!');
-
-            client.del("messagelist");
-            if (amazonKeywordExist) {
-                // TODO: send push notification
-            }            
-
-            client.rpush("messagelist", message);
-            const response = {
-              statusCode: 201      
-            };
-            callback(null, response);
+        client.lrange("messagelist", 0, -1, function (err, allmessages) {
+            var messagesToBePurged = JSON.stringify(allmessages);
+            fs.writeFile('message.txt', messagesToBePurged, (err) => {
+                if (err) throw err;            
+                console.log('The file has been saved!');
+                client.del("messagelist");
+                if (amazonKeywordExist) {
+                    // TODO: send push notification
+                }
+                client.rpush("messagelist", message);
+                const response = {
+                  statusCode: 201      
+                };
+                callback(null, response);
+            });
         });
+        
     } else {
         client.rpush("messagelist", message);
         const response = {
