@@ -57,12 +57,34 @@ plugins:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  post:
+    handler: functions/post.handler
     events:
       - http:
-           path: /hello
-           method: GET
+         path: /post
+         method: POST
+
+
+  getall:
+    handler: functions/getall.handler
+    events:
+      - http:
+         path: /getall
+         method: GET
+
+  update:
+    handler: functions/update.handler
+    events:
+      - http:
+         path: /update
+         method: PUT
+
+  delete:
+    handler: functions/delete.handler
+    events:
+      - http:
+         path: /delete
+         method: DELETE
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
