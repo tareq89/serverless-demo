@@ -10,11 +10,21 @@ client.on("error", function (err) {
 
 module.exports.handler = (event, context, callback) => {
 
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify("All messages")
-    };
-
-    callback(null, response);
+    client.lrange("messagelist", 0, -1, function(err, allMessages) {
+        if (err) {
+            const response = {
+                statusCode: 500,
+                body: JSON.stringify("Internal error occured!")
+            };
+            callback(null, response);
+        } else {
+            const response = {
+                statusCode: 200,
+                body: JSON.stringify(allMessages)
+            };
+            callback(null, response);
+        }
+    });
+    
 }
 

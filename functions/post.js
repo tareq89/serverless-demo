@@ -1,7 +1,7 @@
 'use strict';
-vasr fs = require("fs");
-var redis = require("redis");
-var client = redis.createClient(6379);
+const fs = require("fs");
+const redis = require("redis");
+const client = redis.createClient(6379);
 
 
 client.on("error", function (err) {
