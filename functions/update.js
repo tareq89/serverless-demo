@@ -6,15 +6,16 @@ client.on("error", function (err) {
   console.log("Error " + err);
 });
 
-
-
 module.exports.handler = (event, context, callback) => {
 
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify("message updated")
-    };
-
-    callback(null, response);
+    var index = JSON.parse(event.body).index;
+	var newMessage = JSON.parse(event.body).newMessage;
+	client.lset("messagelist", index, newMessage, function (err, updatedMessage) {		
+		const response = {
+	        statusCode: 200,
+	        body: JSON.stringify("Message updated")
+	    };
+	    callback(null, response);		
+	})   
 }
 

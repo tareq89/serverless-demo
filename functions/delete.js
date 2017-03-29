@@ -9,12 +9,16 @@ client.on("error", function (err) {
 
 
 module.exports.handler = (event, context, callback) => {
-
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify("Messages deleted")
-    };
-
-    callback(null, response);
+	var index = JSON.parse(event.body).index;
+	var hardToImagineStringValue = "___TOBEDELETED__YOU_CANT_POSSIBLY_GUESS_THIS_VALUE***";
+	client.lset("messagelist", index, hardToImagineStringValue, function (err, updatedMessage) {
+		client.lrem("messagelist", 0, hardToImagineStringValue, function (err, success) {
+			const response = {
+		        statusCode: 200,
+		        body: JSON.stringify("Message deleted")
+		    };
+		    callback(null, response);
+		})
+	})    
 }
 
