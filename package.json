@@ -8,6 +8,8 @@
   "author": "muhammed tareq aziz",
   "license": "MIT",
   "devDependencies": {
+    "aws-sdk": "^2.34.0",
+    "dynalite": "^1.2.0",
     "serverless-offline": "^3.13.1"
   },
   "dependencies": {
