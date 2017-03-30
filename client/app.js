@@ -9,7 +9,16 @@
 		vm.apiServiceBaseURI = "http://localhost:3000/";
 		vm.newMessage = null;
 		vm.errorMessage = null;
-		vm.showUpdateOption = false;
+		vm.showUpdateOption = false;		
+
+		vm.getCurrentUserHash = function () {
+			var timeStamp = Math.floor(Date.now() / 1000);
+			var random = Math.round(Math.random()*1000);
+			var hash = timeStamp + random;
+			return hash;
+		}
+
+		vm.hash = vm.getCurrentUserHash();
 
 		vm.loadAllMessages = function () {
 			$http({
@@ -18,8 +27,20 @@
 			}).then(function (response) {
 				vm.allMessages = [];
 				angular.forEach(response.data, function (value, index) {
-					vm.allMessages.push({value: value, showUpdateOption: false})
-				});				
+					
+					var canEditorDelete = false;										
+					if (value.includes(vm.hash)) {
+						canEditorDelete = true;						
+					}
+					var value = value.substr(10);
+					var data = {
+						value: value, 
+						showUpdateOption: false,
+						canEditorDelete: canEditorDelete
+					};					
+					vm.allMessages.push(data);
+				});
+				console.log(vm.allMessages);
 				vm.errorMessage = null;			
 			}, function (error) {
 				vm.errorMessage = "Couldn't load data, try refreshing the browser!";
@@ -27,24 +48,27 @@
 		}
 
 		vm.post = function () {
-			var data = {message: vm.newMessage};
-			$http({
-				method: 'POST',
-				url: vm.apiServiceBaseURI + "post",
-				data: data
-			}).then(function (response) {
-				vm.loadAllMessages();
-				vm.newMessage = null;
-				vm.errorMessage = null;	
-			}, function (error) {
-				vm.errorMessage = "Couldn't post messages, try again!"
-			});
+			if (vm.newMessage) {
+				var data = {message: vm.hash + vm.newMessage};
+				$http({
+					method: 'POST',
+					url: vm.apiServiceBaseURI + "post",
+					data: data
+				}).then(function (response) {
+					vm.loadAllMessages();
+					vm.newMessage = null;
+					vm.errorMessage = null;	
+				}, function (error) {
+					vm.errorMessage = "Couldn't post messages, try again!"
+				});	
+			}
+			
 		}
 
 		vm.update = function (index, messageToBeUpdated) {
 			var dataToBeUpdated = {
 				index: index,
-				newMessage : messageToBeUpdated
+				newMessage : vm.hash + messageToBeUpdated
 			};
 
 			$http({
@@ -76,6 +100,7 @@
 				vm.errorMessage = error;
 			});
 		}
+
 
 		vm.loadAllMessages();
 	});

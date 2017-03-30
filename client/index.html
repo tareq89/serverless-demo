@@ -33,8 +33,8 @@
 			<button class="btn btn-primary col-md-1" ng-show="_message.showUpdateOption" ng-click="update($index, _message.value)">Update</button>			
 
 			<div class="col-md-9" ng-show="!_message.showUpdateOption">{{_message.value}}</div>						
-			<button class="btn btn-primary col-md-1" ng-show="!_message.showUpdateOption" ng-click="_message.showUpdateOption=true">Edit</button>			
-			<button class="btn btn-danger col-md-1" ng-click="delete($index)">Delete</button>		
+			<button class="btn btn-primary col-md-1" ng-show="!_message.showUpdateOption" ng-disabled="!_message.canEditorDelete" ng-click="_message.showUpdateOption=true">Edit</button>
+			<button class="btn btn-danger col-md-1" ng-disabled="!_message.canEditorDelete" ng-click="delete($index)">Delete</button>		
 		</div>
 	</div>
 </div>
