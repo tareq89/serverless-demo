@@ -22,6 +22,20 @@
 			});
 		}
 
+		vm.post = function (message) {
+			var data = {message: message}
+			$http({
+				method: 'POST',
+				url: vm.apiServiceBaseURI + "post",
+				data: data
+			}).then(function (response) {
+				vm.loadAllMessages();
+				vm.errorMessage = null;	
+			}, function (error) {
+				vm.errorMessage = "Couldn't post messages, try again!"
+			});
+		}
+
 		vm.loadAllMessages();
 	});
 
