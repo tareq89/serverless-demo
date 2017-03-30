@@ -16,3 +16,13 @@ What has been done:
 5. When a message contains the word "Amazon", the backend can detect it so that a amazon SNS message can be called
 
 
+To start the client:
+
+cd client
+npm start
+
+
+To start the server
+
+cd server
+npm start
