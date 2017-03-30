@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "handler.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "npm install && serverless offline start"
   },
   "author": "muhammed tareq aziz",
   "license": "MIT",
