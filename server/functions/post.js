@@ -18,7 +18,13 @@ module.exports.handler = (event, context, callback) => {
     var amazonKeywordExist = _message.includes("amazon");
 
     if (keyWordExist) {
-        client.lrange("messagelist", 0, -1, function (err, allmessages) {
+        client.lrange("messagelist", 0, -1, function (err, allmessages) {            
+
+            var allmessagesLength = allmessages.length;
+            for (var i = 0; i < allmessagesLength; i++) {
+                allmessages[i] = allmessages[i].substr(10); // remove the user session hash
+            }
+
             var messagesToBePurged = JSON.stringify(allmessages);
             fs.writeFile('message.txt', messagesToBePurged, (err) => {
                 if (err) throw err;            
