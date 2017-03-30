@@ -2,4 +2,4 @@ docker pull redis
 
 docker run -d --name statup-redis -p 6379:6379 redis
 
-docker run -it --link some-redis:redis --rm redis redis-cli -h redis -p 6379
+docker run -it --link statup-redis:redis --rm redis redis-cli -h redis -p 6379
