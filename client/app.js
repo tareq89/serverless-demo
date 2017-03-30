@@ -54,10 +54,27 @@
 			}).then(function (response) {
 				vm.allMessages[index].showUpdateOption = false;
 				vm.loadAllMessages();
-				vm.errorMessage = null;				
+				vm.errorMessage = null;
 			}, function (error) {
 				vm.errorMessage = error;
 			})
+		}
+
+		vm.delete = function (index) {
+			var indexToBeDeleted = {
+				index: index
+			};
+
+			$http({
+				method: 'DELETE',
+				url: vm.apiServiceBaseURI + "delete",
+				data: indexToBeDeleted
+			}).then(function (response) {
+				vm.loadAllMessages();
+				vm.errorMessage = null;
+			}, function (error) {
+				vm.errorMessage = error;
+			});
 		}
 
 		vm.loadAllMessages();
