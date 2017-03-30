@@ -14,7 +14,7 @@ module.exports.handler = (event, context, callback) => {
     const message = JSON.parse(event.body).message;
 
     var _message = message.toString().toLowerCase();
-    var keyWordExist = _message.includes("amazon"||"lambda"||"dynamodb");
+    var keyWordExist = _message.includes("amazon") || _message.includes("lambda") || _message.includes("dynamodb");
     var amazonKeywordExist = _message.includes("amazon");
 
     if (keyWordExist) {

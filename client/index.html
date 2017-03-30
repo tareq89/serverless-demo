@@ -13,7 +13,7 @@
 	<h1>Serverless Demo</h1>
 	<div class="row">
 		<div class="col-md-10 form-group">
-			<input class="form-control" type="text" name="message" ng-model="message" placeholder="Enter Message">
+			<input class="form-control" type="text" ng-model="newMessage" placeholder="Enter Message" ng-keypress="($event.which === 13)?post():0">
 		</div>
 		<div class="col-md-2 form-group">
 			<button class="btn btn-primary" ng-click="post()">POST</button>
@@ -24,16 +24,16 @@
 			<a class="close" data-dismiss="alert" aria-label="close">&times;</a>			
 			<span>{{errorMessage}}</span>
 		</div>
-		<div ng-repeat="_message in allMessages; track by $index">
+		<div class="row" ng-repeat="_message in allMessages; track by $index">
 			<div class="col-md-1">{{$index+1}}</div>
 			
-			<div class="col-md-9 form-group" ng-show="showUpdateOption" >
-				<input class="form-control" type="text" name="message" ng-model="newMessage" value="{{_message}}">
+			<div class="col-md-9 form-group" ng-show="_message.showUpdateOption" >
+				<input class="form-control" type="text" ng-model="_message.value" ng-keypress="($event.which === 13)?update($index, _message.value):0">
 			</div>			
-			<button class="btn btn-primary col-md-1" ng-show="showUpdateOption" ng-click="showUpdateOption=false">Update</button>			
+			<button class="btn btn-primary col-md-1" ng-show="_message.showUpdateOption" ng-click="update($index, _message.value)">Update</button>			
 
-			<div class="col-md-9" ng-show="!showUpdateOption">{{_message}}</div>						
-			<button class="btn btn-primary col-md-1" ng-show="!showUpdateOption" ng-click="showUpdateOption=true">Edit</button>			
+			<div class="col-md-9" ng-show="!_message.showUpdateOption">{{_message.value}}</div>						
+			<button class="btn btn-primary col-md-1" ng-show="!_message.showUpdateOption" ng-click="_message.showUpdateOption=true">Edit</button>			
 			<button class="btn btn-danger col-md-1" ng-click="delete($index)">Delete</button>		
 		</div>
 	</div>
