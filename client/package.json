@@ -9,10 +9,12 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "angular": "^1.6.3",
     "bootstrap": "^3.3.7",
-    "http-server": "^0.9.0",
     "jquery": "^3.2.1"
+  },
+  "devDependencies": {
+    "http-server": "^0.9.0"
   }
 }
