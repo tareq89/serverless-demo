@@ -53,7 +53,6 @@ module.exports.handler = (event, context, callback) => {
                     //   if (err) console.log(err, err.stack); // an error occurred
                     //   else     console.log(data);           // successful response
                     // });
-
                 }
                 client.rpush("messagelist", message);
                 const response = {

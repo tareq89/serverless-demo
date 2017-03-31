@@ -21,6 +21,15 @@
 cd client
 npm start
 ```
+### To start the Redis
+
+install docker on your machine, then
+
+```
+docker pull redis
+
+docker run -d --name statup-redis -p 6379:6379 redis
+```
 
 ### To start the server
 ```
