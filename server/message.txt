@@ -1,1 +1,1 @@
-["lambda","asdas d","asdasd","asd","asd","asd","a","sd","asd","as","da"]
+["dynamodb","asdasd asd","asda sdasda sd","asd asd as","dasd a","sd as","das","das d","asd"]
