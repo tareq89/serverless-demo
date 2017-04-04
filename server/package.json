@@ -4,12 +4,14 @@
   "main": "handler.js",
   "scripts": {
     "test": "test",
-    "start": "npm install && serverless offline start"
+    "start": "npm install && serverless offline start",
+    "subscribe": "node localDev.js"
   },
   "author": "muhammed tareq aziz",
   "license": "MIT",
   "devDependencies": {
-    "aws-sdk": "^2.34.0",    
+    "@rabblerouser/local-kinesis-lambda-runner": "^0.2.3",
+    "aws-sdk": "^2.34.0",
     "redis": "^2.7.1",
     "serverless-offline": "^3.13.1"
   },

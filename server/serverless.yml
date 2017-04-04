@@ -97,7 +97,7 @@ functions:
     handler: functions/stream.handler
     events:
       - stream:
-          arn: arn:aws:kinesis:region:us-east-1:tareq89:stream/statup
+          arn: arn:aws:kinesis:region:us-east-1:tareq:stream/statup
           batchSize: 100
           startingPosition: LATEST
           enabled: true
