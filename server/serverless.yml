@@ -20,6 +20,13 @@ service: statUp
 provider:
   name: aws
   runtime: nodejs4.3
+  region: us-east-1
+  stage: dev
+  iamRoleStatements:
+    - Effect: "Allow"
+      Resource: "*"
+      Action:
+        - "kinesis:*"
 
 plugins:
   - serverless-offline
@@ -90,10 +97,10 @@ functions:
     handler: functions/stream.handler
     events:
       - stream:
-        arn: arn:aws:kinesis:region:us-east-1:stream/statup
-        batchSize: 100
-        startingPosition: LATEST
-        enabled: false
+          arn: arn:aws:kinesis:region:us-east-1:tareq89:stream/statup
+          batchSize: 100
+          startingPosition: LATEST
+          enabled: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
