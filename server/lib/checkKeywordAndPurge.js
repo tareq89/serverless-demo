@@ -10,7 +10,7 @@ client.on("error", function (err) {
 });
 
 
-module.exports.checkAndurge = (message, callback) => {
+module.exports.checkAndpurge = (message, callback) => {
 	var _message = message.toString().toLowerCase();
     var keyWordExist = _message.includes("amazon") || _message.includes("lambda") || _message.includes("dynamodb");
     var amazonKeywordExist = _message.includes("amazon");

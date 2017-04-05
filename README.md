@@ -9,13 +9,18 @@
 
 ## What has been done:
 
+### version - v1
 1. One page website to post message others to see
 2. The current user can only edit/delete those messages which were posted by her/him, if reloads the page, no longer can edit/delete
 3. No login, anonymous user can post and see messages, edit/delete while still on the page
 4. Anytime a message contains the words "Amazon", "Lambda", or "DynamoDB", messages entered prior to it archived to a JSON file and purged from view. The message that triggered the purge will now be the first message available to all new visitors.
 5. When a message contains the word "Amazon", the backend can detect it so that a amazon SNS message can be called
 
-
+### version - v2
+1. push the message to kinesis stream and handle the checking - purging operation
+2. do not overwrite existing file
+3. tag the old, new and release versions
+4. separate sns push
 
 ### To start the Redis
 

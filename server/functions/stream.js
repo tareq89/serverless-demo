@@ -22,7 +22,7 @@ exports.handler = function(event, context, callback) {
         console.log('Decoded payload:', payload);
         
         payload = JSON.parse(payload);        
-        check.checkAndurge(payload.message, ()=> {        	
+        check.checkAndpurge(payload.message, ()=> {        	
         	if (payload.method === "POST") {        		
 				payload = JSON.stringify(payload);
 				var _event = {body: payload};
