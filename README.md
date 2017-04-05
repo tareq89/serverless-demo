@@ -31,6 +31,22 @@ docker pull redis
 docker run -d --name statup-redis -p 6379:6379 redis
 ```
 
+To start kinesalite on a docker container
+
+```
+
+```
+
+To start the kinesalite server and create a stream
+```
+```
+
+
+To subscribe lambda to kinesis polling
+```
+KINESIS_ENDPOINT=http://localhost:4567 STREAM_NAME=statup node subscribe-lambda-for-kinesis-polling.js
+```
+
 ### To start the server
 ```
 cd server

@@ -4,8 +4,7 @@
   "main": "handler.js",
   "scripts": {
     "test": "test",
-    "start": "npm install && serverless offline start",
-    "subscribe": "node localDev.js"
+    "start": "npm install && serverless offline start"    
   },
   "author": "muhammed tareq aziz",
   "license": "MIT",
