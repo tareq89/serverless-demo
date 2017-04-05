@@ -9,43 +9,47 @@ client.on("error", function (err) {
 
 
 var AWS = require('aws-sdk');
-AWS.config.region = 'eu-west-1';
-var lambda = new AWS.Lambda();
+// AWS.config = 
+var lambda = new AWS.Lambda({
+	region : 'ap-southeast-2',
+	accessKeyId: 'FAKE',
+	secretAccessKey: 'ALSO FAKE'
+});
 
 
-const checkKeywordAndPurge = require("./../lib/checkKeywordAndPurge");
-
+const check = require("./../lib/checkKeywordAndPurge");
 
 exports.handler = function(event, context, callback) {
-    event.Records.forEach(function(record) {
+    event.Records.forEach(function(record) {    	
         // Kinesis data is base64 encoded so decode here
         var payload = new Buffer(record.kinesis.data, 'base64').toString('ascii');
         console.log('Decoded payload:', payload);
         
         payload = JSON.parse(payload);
         console.log(payload)
-        checkKeywordAndPurge(payload.message, ()=> {
+        check.checkAndurge(payload.message, ()=> {
         	if (payload.method === "POST") {
         		var params = {
 				    FunctionName: 'post',
 				    InvocationType: 'RequestResponse',
 				    LogType: 'Tail',
-				    Payload: payload
+				    Payload: payload.message
 				};
 
 				lambda.invoke(params, (err, data) => {
 					if (err) {
-						context.fail(err);
+						console.log(err);
 					} else {
-						context.succeed("post returned : " + data.Payload);
+						console.log("post returned : " + data.Payload);
 					}
+					callback(null, "message");
 				})
         	} else if (payload.method === "PUT") {
         		var params = {
 				    FunctionName: 'update',
 				    InvocationType: 'RequestResponse',
 				    LogType: 'Tail',
-				    Payload: payload
+				    Payload: payload.message
 				};
 
 				lambda.invoke(params, (err, data) => {
@@ -54,10 +58,10 @@ exports.handler = function(event, context, callback) {
 					} else {
 						context.succeed("put returned : " + data.Payload);
 					}
+					callback(null, "message");
 				})
         	}
         })
 
-    });
-    callback(null, "message");
+    });    
 };

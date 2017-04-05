@@ -10,7 +10,7 @@ client.on("error", function (err) {
 });
 
 
-module.exports.checkKeywordAndPurge = function (message, callback) {
+module.exports.checkAndurge = (message, callback) => {
 	var _message = message.toString().toLowerCase();
     var keyWordExist = _message.includes("amazon") || _message.includes("lambda") || _message.includes("dynamodb");
     var amazonKeywordExist = _message.includes("amazon");
@@ -28,10 +28,12 @@ module.exports.checkKeywordAndPurge = function (message, callback) {
                 if (err) throw err;
                 client.del("messagelist");
                 if (amazonKeywordExist) {
-                    SNS(message);
+                    SNS.sendSNS(message);
                 }
                 callback();
             });
         });        
+    } else {
+        callback();
     }
 }
