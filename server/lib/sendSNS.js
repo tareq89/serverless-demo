@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.export.sendSNS = (message) => {
+module.exports.sendSNS = (message) => {
 	// TODO: send push notification
     // var sns = new AWS.SNS({apiVersion: '2010-03-31'});
     // var params = {

@@ -13,7 +13,7 @@ AWS.config.region = 'eu-west-1';
 var lambda = new AWS.Lambda();
 
 
-const checkKeyWordAndPurge = require("../lib/checkKeyWordAndPurge");
+const checkKeywordAndPurge = require("./../lib/checkKeywordAndPurge");
 
 
 exports.handler = function(event, context, callback) {
@@ -23,7 +23,8 @@ exports.handler = function(event, context, callback) {
         console.log('Decoded payload:', payload);
         
         payload = JSON.parse(payload);
-        checkKeyWordAndPurge(payload.message, ()=> {
+        console.log(payload)
+        checkKeywordAndPurge(payload.message, ()=> {
         	if (payload.method === "POST") {
         		var params = {
 				    FunctionName: 'post',
@@ -39,7 +40,7 @@ exports.handler = function(event, context, callback) {
 						context.succeed("post returned : " + data.Payload);
 					}
 				})
-        	} else (payload.method === "PUT") {
+        	} else if (payload.method === "PUT") {
         		var params = {
 				    FunctionName: 'update',
 				    InvocationType: 'RequestResponse',
@@ -51,7 +52,7 @@ exports.handler = function(event, context, callback) {
 					if (err) {
 						context.fail(err);
 					} else {
-						context.succeed("post returned : " + data.Payload);
+						context.succeed("put returned : " + data.Payload);
 					}
 				})
         	}

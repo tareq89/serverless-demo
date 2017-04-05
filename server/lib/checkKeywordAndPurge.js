@@ -2,7 +2,7 @@
 const fs = require("fs");
 const redis = require("redis");
 const client = redis.createClient(6379);
-const sendSNS = require('sendSNS');
+const SNS = require('./sendSNS');
 
 
 client.on("error", function (err) {
@@ -10,7 +10,7 @@ client.on("error", function (err) {
 });
 
 
-module.export.checkKeywordAndPurge = function (message, callback) {
+module.exports.checkKeywordAndPurge = function (message, callback) {
 	var _message = message.toString().toLowerCase();
     var keyWordExist = _message.includes("amazon") || _message.includes("lambda") || _message.includes("dynamodb");
     var amazonKeywordExist = _message.includes("amazon");
@@ -28,7 +28,7 @@ module.export.checkKeywordAndPurge = function (message, callback) {
                 if (err) throw err;
                 client.del("messagelist");
                 if (amazonKeywordExist) {
-                    sendSNS(message);
+                    SNS(message);
                 }
                 callback();
             });
