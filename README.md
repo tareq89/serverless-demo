@@ -16,11 +16,7 @@
 5. When a message contains the word "Amazon", the backend can detect it so that a amazon SNS message can be called
 
 
-### To start the client:
-```
-cd client
-npm start
-```
+
 ### To start the Redis
 
 install docker on your machine, then
@@ -30,25 +26,43 @@ docker pull redis
 
 docker run -d --name statup-redis -p 6379:6379 redis
 ```
-
-To start kinesalite on a docker container
-
+from next time, just type
 ```
-
-```
-
-To start the kinesalite server and create a stream
-```
+docker start statup-redis
 ```
 
 
-To subscribe lambda to kinesis polling
+### To start kinesalite on a docker container
+
 ```
+docker pull dlsniper/kinesalite
+
+docker run -d --name statup-kinesis -p 4567:4567 dlsniper/kinesalite
+```
+from next time, just type
+```
+docker start statup-kinesis
+```
+
+### To create a stream called statup
+```
+aws kinesis create-stream --stream-name Foo --shard-count 1
+```
+
+### To subscribe lambda post, update function to kinesis polling
+```
+cd server/
 KINESIS_ENDPOINT=http://localhost:4567 STREAM_NAME=statup node subscribe-lambda-for-kinesis-polling.js
 ```
 
 ### To start the server
 ```
 cd server
+npm start
+```
+
+### To start the client:
+```
+cd client
 npm start
 ```
