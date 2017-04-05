@@ -106,7 +106,7 @@
 
 			$http({
 				method: 'POST',
-				url: vm.kinesisStreamServiceURI + "update",
+				url: vm.kinesisStreamServiceURI,
 				data: streamPayload,
 				headers: vm.headers
 			}).then(function (response) {

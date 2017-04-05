@@ -24,14 +24,25 @@ module.exports.checkAndurge = (message, callback) => {
             }
 
             var messagesToBePurged = JSON.stringify(allmessages);
-            fs.appendFile('message.txt', messagesToBePurged, (err) => {
-                if (err) throw err;
-                client.del("messagelist");
-                if (amazonKeywordExist) {
-                    SNS.sendSNS(message);
-                }
-                callback();
-            });
+            fs.readFile('message.json', function (err, data) {
+                if (err) { 
+                    console.log(err);
+                } else {                    
+                    var messages = JSON.parse(data);
+                    var timeStamp = Math.floor(Date.now() / 1000);
+                    messages[timeStamp] = messagesToBePurged;
+                    var messages = JSON.stringify(messages);
+                    fs.writeFile('message.json', messages, (err) => {
+                        if (err) throw err;
+                        client.del("messagelist");
+                        if (amazonKeywordExist) {
+                            SNS.sendSNS(message);
+                        }
+                        callback();
+                    });
+                }    
+            }); 
+            
         });        
     } else {
         callback();

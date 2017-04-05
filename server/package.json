@@ -4,7 +4,7 @@
   "main": "handler.js",
   "scripts": {
     "test": "test",
-    "start": "npm install && serverless offline start"    
+    "start": "npm install && serverless offline start"
   },
   "author": "muhammed tareq aziz",
   "license": "MIT",
@@ -15,6 +15,7 @@
     "serverless-offline": "^3.13.1"
   },
   "dependencies": {
+    "lambda-wrapper": "^0.1.2",
     "serverless-offline": "^3.13.1"
   },
   "repository": {

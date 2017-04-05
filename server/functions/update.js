@@ -8,8 +8,9 @@ client.on("error", function (err) {
 
 module.exports.handler = (event, context, callback) => {
 
+	console.log("THIS IS FROM UPDATE : " + event.body)
     var index = JSON.parse(event.body).index;
-	var newMessage = JSON.parse(event.body).message;
+	var message = JSON.parse(event.body).message;
 	client.lset("messagelist", index, message, function (err, updatedMessage) {		
 		const response = {
 	        statusCode: 200,
